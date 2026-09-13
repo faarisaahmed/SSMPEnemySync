@@ -1,0 +1,97 @@
+[
+  {
+    "name": "Aspid Collector",
+    "fsm": "Control",
+    "maxHealth": 15
+  },
+  {
+    "name": "Bone Beast",
+    "fsm": "Control",
+    "maxHealth": 150
+  },
+  {
+    "name": "Bone Circler",
+    "fsm": "Control",
+    "maxHealth": 14
+  },
+  {
+    "name": "Bone Crawler",
+    "fsm": "Control",
+    "maxHealth": 20
+  },
+  {
+    "name": "Bone Flyer",
+    "fsm": "Control",
+    "maxHealth": 15
+  },
+  {
+    "name": "Bone Flyer Return",
+    "fsm": "Control",
+    "maxHealth": 15
+  },
+  {
+    "name": "Bone Goomba",
+    "fsm": "Control",
+    "maxHealth": 15
+  },
+  {
+    "name": "Bone Goomba Large",
+    "fsm": "Control",
+    "maxHealth": 30
+  },
+  {
+    "name": "Bone Roller",
+    "fsm": "Control",
+    "maxHealth": 15
+  },
+  {
+    "name": "Bone Thumper",
+    "fsm": "Control",
+    "maxHealth": 45
+  },
+  {
+    "name": "MossBone Cocoon",
+    "fsm": "Control",
+    "maxHealth": 1
+  },
+  {
+    "name": "MossBone Crawler",
+    "fsm": "Noise Reaction",
+    "maxHealth": 10
+  },
+  {
+    "name": "MossBone Crawler Summon",
+    "fsm": "Summon Control",
+    "maxHealth": 10
+  },
+  {
+    "name": "MossBone Fly",
+    "fsm": "Control",
+    "maxHealth": 12
+  },
+  {
+    "name": "Mossbone Mother",
+    "fsm": "Control",
+    "maxHealth": 120
+  },
+  {
+    "name": "Pilgrim",
+    "fsm": "pilgrim_behaviour",
+    "maxHealth": 20
+  },
+  {
+    "name": "Pilgrim 01",
+    "fsm": "pilgrim_behaviour",
+    "maxHealth": 20
+  },
+  {
+    "name": "Pilgrim 03",
+    "fsm": "pilgrim_behaviour",
+    "maxHealth": 20
+  },
+  {
+    "name": "Pilgrim Moss Spitter",
+    "fsm": "Control",
+    "maxHealth": 20
+  }
+]

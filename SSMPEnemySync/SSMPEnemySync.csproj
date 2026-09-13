@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Nullable>disable</Nullable>
+        <AssemblyName>SSMPEnemySync</AssemblyName>
+        <RootNamespace>SSMPEnemySync</RootNamespace>
+        <Version>0.1.0</Version>
+        <!-- SSMP internals are reached by reflection, so we never bind to them at compile time. -->
+        <NoWarn>$(NoWarn);CS0168</NoWarn>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+
+    <!--
+    Paths into the Wineskin prefix that holds the GOG install. Override GameDir on the command line
+    to build against a different install:
+        dotnet build -p:GameDir=/path/to/Hollow Knight Silksong
+    -->
+    <PropertyGroup>
+        <GameDir Condition="'$(GameDir)' == ''">$(HOME)/Downloads/Silksong.app/Contents/SharedSupport/prefix/drive_c/GOG Games/Hollow Knight Silksong</GameDir>
+        <ManagedDir>$(GameDir)/Hollow Knight Silksong_Data/Managed</ManagedDir>
+        <BepInExDir>$(GameDir)/BepInEx</BepInExDir>
+        <SsmpDir>$(BepInExDir)/plugins/ssmp-fixed</SsmpDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="res/silksong-enemies.json"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- SSMP itself: only its public addon API is bound at compile time. -->
+        <Reference Include="SSMP">
+            <HintPath>$(SsmpDir)/SSMP.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+
+        <!-- Game and engine assemblies. -->
+        <Reference Include="Assembly-CSharp">
+            <HintPath>$(ManagedDir)/Assembly-CSharp.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="PlayMaker">
+            <HintPath>$(ManagedDir)/PlayMaker.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Newtonsoft.Json">
+            <HintPath>$(ManagedDir)/Newtonsoft.Json.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>$(ManagedDir)/UnityEngine.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>$(ManagedDir)/UnityEngine.CoreModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.Physics2DModule">
+            <HintPath>$(ManagedDir)/UnityEngine.Physics2DModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
+    <!--
+    Deploy next to SSMP.dll. SSMP's AddonLoader scans the directory its own assembly sits in,
+    so the addon is only discovered from there.
+    -->
+    <Target Name="DeployAddon" AfterTargets="Build" Condition="'$(NoDeploy)' != 'true'">
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SsmpDir)/" ContinueOnError="true"/>
+        <Message Importance="high" Text="Deployed $(TargetFileName) -> $(SsmpDir)/"/>
+    </Target>
+
+</Project>

@@ -1,0 +1,10 @@
+# Build output
+bin/
+obj/
+
+# SSMP's own source, cloned separately for reference. It is a different project
+# (github.com/Extremelyd1/SSMP) and must not be committed here.
+SSMP/
+
+# macOS
+.DS_Store
